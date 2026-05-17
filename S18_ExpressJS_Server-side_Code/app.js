@@ -2,7 +2,7 @@ const express = require("express");
 
 const appexpress = express();
 
-appexpress.use(express.urlencoded({ extended: false })); //urlencode->middleware function
+appexpress.use(express.urlencoded({ extended: false })); //urlencode->middleware function setted false because the form data is very simple
 
 appexpress.get("/currenttime", function (req, res) {
   res.send("<h1>" + new Date().toISOString() + "</h1>");
