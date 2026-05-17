@@ -1,8 +1,10 @@
-const express = require("express");
+const fs = require("fs");
+const path = require("path");
 
+const express = require("express");
 const appexpress = express();
 
-appexpress.use(express.urlencoded({ extended: false })); //urlencode->middleware function setted false because the form data is very simple
+appexpress.use(express.urlencoded({ extended: true })); //urlencode->middleware function setted false because the form data is very simple
 
 appexpress.get("/currenttime", function (req, res) {
   res.send("<h1>" + new Date().toISOString() + "</h1>");
@@ -16,7 +18,16 @@ appexpress.get("/", function (req, res) {
 
 appexpress.post("/store-user", function (req, res) {
   const userName = req.body.username;
-  console.log(userName);
+
+  const filePath = path.join(__dirname, "data", "users.json");
+  const fileData = fs.readFileSync(filePath);
+  const existingUsers = JSON.parse(fileData);
+
+  existingUsers.push(userName);
+
+  fs.writeFileSync(filePath, JSON.stringify(existingUsers));
+
   res.send("<h1>Username stored!</h1>");
 });
+
 appexpress.listen(3000);
