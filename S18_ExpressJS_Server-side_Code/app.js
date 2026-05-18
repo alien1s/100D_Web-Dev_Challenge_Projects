@@ -27,7 +27,22 @@ appexpress.post("/store-user", function (req, res) {
 
   fs.writeFileSync(filePath, JSON.stringify(existingUsers));
 
-  res.send("<h1>Username stored!</h1>");
-});
+  res.send(
+    "<h1>Username stored!</h1><a href='localhost:3000/stored-user'>See Stored User</a>",
+  );
+}); // localhost:3000/store-user
+
+appexpress.get("/stored-user", function (req, res) {
+  const filePath = path.join(__dirname, "data", "users.json");
+  const fileData = fs.readFileSync(filePath);
+  const existingUsers = JSON.parse(fileData);
+
+  let listItems = "";
+  for (const user of existingUsers) {
+    listItems += `<li>${user}</li>`;
+  }
+
+  res.send(`<ul>${listItems}</ul>`);
+}); // localhost:3000/stored-user
 
 appexpress.listen(3000);
