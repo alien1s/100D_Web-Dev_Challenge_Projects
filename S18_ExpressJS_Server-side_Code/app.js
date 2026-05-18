@@ -12,7 +12,7 @@ appexpress.get("/currenttime", function (req, res) {
 
 appexpress.get("/", function (req, res) {
   res.send(
-    '<form action="/store-user" method="POST"><lable>Your Name</lable><input type="text" name="username"/><button>Submit</button></form>',
+    '<form action="/store-user" method="POST"><lable>Your Name:</lable><input type="text" name="username"/><button>Submit</button></form>',
   );
 }); // localhost:3000/
 
