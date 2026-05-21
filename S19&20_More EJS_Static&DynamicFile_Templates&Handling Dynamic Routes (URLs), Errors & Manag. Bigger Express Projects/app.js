@@ -19,7 +19,15 @@ app.get("/restaurants", function (req, res) {
   const fileData = fs.readFileSync(filePath);
   const storedRestaurants = JSON.parse(fileData);
 
-  res.render("restaurants", { restaurantsNumber:storedRestaurants.length, restaurants:storedRestaurants});
+  res.render("restaurants", {
+    restaurantsNumber: storedRestaurants.length,
+    restaurants: storedRestaurants,
+  });
+});
+
+app.get("/restaurants/:id", function (req, res) {
+  const restaurantId = req.params.id;
+  res.render("restaurant-detail", { rid: restaurantId });
 });
 
 app.get("/recommend", function (req, res) {
