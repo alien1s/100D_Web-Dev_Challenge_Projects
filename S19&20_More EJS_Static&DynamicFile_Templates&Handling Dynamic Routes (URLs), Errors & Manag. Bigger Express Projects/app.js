@@ -37,8 +37,9 @@ app.get("/restaurants/:id", function (req, res) {
     if (restaurant.id === restaurantId) {
       return res.render("restaurant-detail", { restaurant: restaurant });
     }
-
   }
+
+  res.render("404");
 });
 
 app.get("/recommend", function (req, res) {
