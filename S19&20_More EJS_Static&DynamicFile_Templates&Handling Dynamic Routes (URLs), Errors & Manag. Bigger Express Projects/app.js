@@ -50,12 +50,10 @@ app.post("/recommend", function (req, res) {
   const restaurants = req.body;
   restaurants.id = uuid.v4();
 
-  const filePath = path.join(__dirname, "data", "restaurants.json");
-  const fileData = fs.readFileSync(filePath);
-  const storedRestaurants = JSON.parse(fileData);
+  const storedRestaurants = getStoredRestaurants();
 
   storedRestaurants.push(restaurants);
-  fs.writeFileSync(filePath, JSON.stringify(storedRestaurants));
+  storeNewRestaurantInData(storedRestaurants);
 
   res.redirect("/confirm");
 });
