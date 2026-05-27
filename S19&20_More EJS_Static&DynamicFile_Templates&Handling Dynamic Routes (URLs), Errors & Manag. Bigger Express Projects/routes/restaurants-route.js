@@ -6,10 +6,24 @@ const resDataUtil = require("../util/restaurant-data-util");
 const router = express.Router();
 
 router.get("/restaurants", function (req, res) {
+  let order = req.query.order;
+  let nexOrd = "desc";
+
+  if (order !== "asc" && order !== "desc") {
+    order = "asc";
+  }
+
+  if (order === "desc") {
+    nexOrd = "asc";
+  }
+
   const storedRestaurants = resDataUtil.getStoredRestaurants();
 
   storedRestaurants.sort(function (resA, resB) {
-    if (resA.name > resB.name) {
+    if (
+      (order === "asc" && resA.name > resB.name) ||
+      (order === "desc" && resB.name > resA.name)
+    ) {
       return 1;
     }
     return -1;
@@ -18,6 +32,7 @@ router.get("/restaurants", function (req, res) {
   res.render("restaurants", {
     restaurantsNumber: storedRestaurants.length,
     restaurants: storedRestaurants,
+    nexOrd: nexOrd,
   });
 });
 
