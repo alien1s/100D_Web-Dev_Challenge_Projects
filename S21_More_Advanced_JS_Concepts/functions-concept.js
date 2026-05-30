@@ -1,9 +1,13 @@
+// Using Functions & Default Parameters
+
 function greatinUser(greatinPrefix, userName = "user") {
   console.log(greatinPrefix + " " + userName + "!");
 }
 
 greatinUser("Hi", "Max");
 greatinUser("Hello");
+
+//------------- Using Rest Parameters & The Spread Operator
 
 function sumUp(...numbers) {
   let result = 0;
