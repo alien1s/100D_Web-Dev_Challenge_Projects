@@ -25,12 +25,21 @@ const inputNumbers = [1, 5, 10, 11, 20, 31];
 
 console.log(sumUp(...inputNumbers));
 
-// we can use a function as a object like express and the app object 
-// so we can add propery and methods their 
-// by assigining it with function name 
-// and the .nameofproperty then = the value 
-// and also you can consele the function 
+// we can use a function as a object like express and the app object
+// so we can add propery and methods their
+// by assigining it with function name
+// and the .nameofproperty then = the value
+// and also you can consele the function
 // to show the object by dir and log as following
 
 console.log(sumUp);
 console.dir(sumUp);
+
+// Using Tamplate literals
+
+function greatinUserWithLiteralsTemp(greatinPrefix, userName = "user") {
+  console.log(`${greatinPrefix} ${userName} !`);
+}
+
+greatinUserWithLiteralsTemp("Hi", "Max");
+greatinUserWithLiteralsTemp("Hello");
