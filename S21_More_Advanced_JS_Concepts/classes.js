@@ -23,5 +23,7 @@ class JOB {
 }
 
 const developer = new JOB("Developer", "New York", 5000);
+const cooker = new JOB("Cook", "Cairo", 3000);
 
 console.log(developer);
+console.log(cooker);
