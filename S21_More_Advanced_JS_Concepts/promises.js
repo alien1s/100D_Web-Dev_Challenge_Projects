@@ -17,19 +17,36 @@ const fs = require("fs/promises");
 
 // readFile();
 
-function readFile2() {
-  fs.readFile("dataa.txt")
-    .then(function (fileData) {
-      console.log("file parsing done!");
-      console.log(fileData.toString());
-      //return anotherAsyncOperation;
-    })
-    .then(function () {})
-    .catch(function (error) {
-      console.log(error);
-    });
+// function readFile2() {
+//   fs.readFile("dataa.txt")
+//     .then(function (fileData) {
+//       console.log("file parsing done!");
+//       console.log(fileData.toString());
+//       //return anotherAsyncOperation;
+//     })
+//     .then(function () {})
+//     .catch(function (error) {
+//       console.log(error);
+//     });
+
+//   console.log("Hi there!");
+// }
+
+// readFile2();
+
+async function readFile3() {
+  try {
+    const fileData = await fs.readFile("data.txt");
+  } catch (error) {
+    console.log(error);
+  }
+
+  console.log("file parsing done!");
+  console.log(fileData.toString());
 
   console.log("Hi there!");
 }
 
-readFile2();
+readFile3();
+
+console.log(readFile3());
