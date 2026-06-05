@@ -1,38 +1,38 @@
 const fs = require("fs/promises");
 
-// function readFile() {
-//   fs.readFile("data.txt")
-//     .then(function (fileData) {
-//       console.log("file parsing done!");
-//       console.log(fileData.toString());
-//       //return anotherAsyncOperation;
-//     })
-//     .then(function () {})
-//     .catch(function (error) {
-//       console.log(error);
-//     });
+function readFile() {
+  fs.readFile("data.txt")
+    .then(function (fileData) {
+      console.log("file parsing done!");
+      console.log(fileData.toString());
+      //return anotherAsyncOperation;
+    })
+    .then(function () {})
+    .catch(function (error) {
+      console.log(error);
+    });
 
-//   console.log("Hi there!");
-// }
+  console.log("Hi there!");
+}
 
-// readFile();
+readFile();
 
-// function readFile2() {
-//   fs.readFile("dataa.txt")
-//     .then(function (fileData) {
-//       console.log("file parsing done!");
-//       console.log(fileData.toString());
-//       //return anotherAsyncOperation;
-//     })
-//     .then(function () {})
-//     .catch(function (error) {
-//       console.log(error);
-//     });
+function readFile2() {
+  fs.readFile("dataa.txt")
+    .then(function (fileData) {
+      console.log("file parsing done!");
+      console.log(fileData.toString());
+      //return anotherAsyncOperation;
+    })
+    .then(function () {})
+    .catch(function (error) {
+      console.log(error);
+    });
 
-//   console.log("Hi there!");
-// }
+  console.log("Hi there!");
+}
 
-// readFile2();
+readFile2();
 
 async function readFile3() {
   try {
@@ -48,5 +48,3 @@ async function readFile3() {
 }
 
 readFile3();
-
-console.log(readFile3());
