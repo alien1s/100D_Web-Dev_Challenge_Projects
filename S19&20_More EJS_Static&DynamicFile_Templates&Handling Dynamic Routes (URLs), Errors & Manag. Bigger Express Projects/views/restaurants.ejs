@@ -19,12 +19,14 @@
       <p>Find your next favorite restaurants with help of our other users!</p>
       <p>We Found <%=restaurantsNumber%> restaurants</p>
       <form action="/restaurants" method="GET">
-        <input type="hidden" value="<%= nexOrd%>" name="order" />
+        <input type="hidden" name="order" value="<%= nexOrd%>" />
         <button class="btn">Change Order</button>
       </form>
       <ul id="restaurants-list">
-        <% for (const restaurant of restaurants){%> <%-
-        include('includes/restaurants/restaurant-item', {restaurant})%> <% } %>
+        <% for (const restaurant of restaurants){%>
+        <%-include('includes/restaurants/restaurant-item', {restaurant})%>
+        <!--line break-->
+        <%}%>
       </ul>
       <%}%>
     </main>
