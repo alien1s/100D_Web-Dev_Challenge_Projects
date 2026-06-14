@@ -10,8 +10,6 @@ function handleRequest(request, response) {
     response.statusCode = 200;
     response.end("<h1>Hi Hommies, I'm Alien</h1>");
   }
-  response.statusCode = 200;
-  response.end("<h1>Hi Hommies, I'm Alien</h1>");
 }
 
 const server = http.createServer(handleRequest);
