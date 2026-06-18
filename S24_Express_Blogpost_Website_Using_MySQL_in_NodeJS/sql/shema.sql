@@ -7,7 +7,7 @@ CREATE TABLE blog_webapp.authors (
 CREATE TABLE blog_webapp.posts (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(225) NOT NULL,
-    summry VARCHAR(225) NOT NULL,
+    summary VARCHAR(225) NOT NULL,
     body TEXT NOT NULL,
     date DATETIME DEFAULT CURRENT_TIMESTAMP,
     author_id INT NOT NULL
