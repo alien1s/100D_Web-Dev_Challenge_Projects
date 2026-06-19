@@ -55,4 +55,21 @@ router.post("/posts", async function (req, res) {
   res.redirect("/posts");
 });
 
+router.get("/posts/:id", async function (req, res) {
+  const postId = req.params.id;
+  const queryPath = path.join(
+    __dirname,
+    "..",
+    "sql",
+    "queries",
+    "get_single_post.sql",
+  );
+  const query = await fs.readFile(queryPath, "utf-8");
+  const [post] = await db.query(query, postId);
+  if (!post || post.length === 0) {
+    return res.statusCode(404).render("404");
+  }
+  res.render("post-detail", { post: post[0] });
+});
+
 module.exports = router;
