@@ -51,7 +51,7 @@ router.post("/posts", async function (req, res) {
     req.body.content,
     req.body.author,
   ];
-  await db.query(query, data);
+  await db.query(query, [data]);
 
   res.redirect("/posts");
 });
@@ -117,9 +117,29 @@ router.post("/posts/:id/edit", async function (req, res) {
   );
   const query = await fs.readFile(queryPath, "utf-8");
 
-  const updatedData = [req.body.title, req.body.summary, req.body.content, postId];
+  const updatedData = [
+    req.body.title,
+    req.body.summary,
+    req.body.content,
+    postId,
+  ];
 
   await db.query(query, updatedData);
+
+  res.redirect("/posts");
+});
+
+router.post("/posts/:id/delete", async function (req, res) {
+  const postId = req.params.id;
+  const queryPath = path.join(
+    __dirname,
+    "..",
+    "sql",
+    "queries",
+    "delete_post.sql",
+  );
+  const query = await fs.readFile(queryPath, "utf-8");
+  await db.query(query, [postId]);
 
   res.redirect("/posts");
 });
