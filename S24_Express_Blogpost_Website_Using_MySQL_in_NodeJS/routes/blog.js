@@ -42,7 +42,7 @@ router.post("/posts", async function (req, res) {
     "..",
     "sql",
     "queries",
-    "insert-new-post.sql",
+    "insert_new_post.sql",
   );
   const query = await fs.readFile(queryPath, "utf-8");
   const data = [
@@ -104,6 +104,24 @@ router.get("/posts/:id/edit", async function (req, res) {
   }
 
   res.render("update-post", { post: post[0] });
+});
+
+router.post("/posts/:id/edit", async function (req, res) {
+  const postId = req.params.id;
+  const queryPath = path.join(
+    __dirname,
+    "..",
+    "sql",
+    "queries",
+    "update_post.sql",
+  );
+  const query = await fs.readFile(queryPath, "utf-8");
+
+  const updatedData = [req.body.title, req.body.summary, req.body.content, postId];
+
+  await db.query(query, updatedData);
+
+  res.redirect("/posts");
 });
 
 module.exports = router;
