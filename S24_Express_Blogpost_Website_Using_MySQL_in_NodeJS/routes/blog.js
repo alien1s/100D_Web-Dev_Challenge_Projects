@@ -64,12 +64,25 @@ router.get("/posts/:id", async function (req, res) {
     "queries",
     "get_single_post.sql",
   );
+
   const query = await fs.readFile(queryPath, "utf-8");
   const [post] = await db.query(query, postId);
+
   if (!post || post.length === 0) {
     return res.statusCode(404).render("404");
   }
-  res.render("post-detail", { post: post[0] });
+
+  const postData = {
+    ...post[0],
+    date: post[0].date.toISOString(),
+    hummanReadableDate: post[0].date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }),
+  };
+  res.render("post-detail", { post: postData });
 });
 
 module.exports = router;
