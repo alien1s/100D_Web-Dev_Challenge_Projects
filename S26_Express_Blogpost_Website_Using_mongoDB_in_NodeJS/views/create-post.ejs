@@ -26,7 +26,10 @@
       <div class="form-control">
         <label for="author">Select Author</label>
         <select id="author" name="author">
-          
+          <option value="" disabled selected hidden>Select an author...</option>
+          <% for(author of authors) {%>
+              <option value="<%= author.id %>"><%= author.name %></option>
+            <% } %>
         </select>
       </div>
       <button class="btn">Add Post</button>
