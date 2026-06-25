@@ -1,0 +1,8 @@
+//6a3d3f019e6a8efc87046b5a
+
+use("restaurant-reviews-db");
+
+db.restaurants.updateOne(
+  { _id: ObjectId("6a3d3f019e6a8efc87046b5a") },
+  { $set: { "address.street": "Schnitzelstreet" } },
+);

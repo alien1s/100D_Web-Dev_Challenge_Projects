@@ -1,0 +1,5 @@
+//reviewerName: "Hans S.",
+
+use("restaurant-reviews-db");
+
+db.reviews.deleteOne({ reviewerName: "Hans S." });

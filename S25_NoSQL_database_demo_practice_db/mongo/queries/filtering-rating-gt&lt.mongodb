@@ -1,0 +1,8 @@
+use("restaurant-reviews-db");
+
+// db.reviews.find({ rating: { $lt: 4 } }); => <4
+// db.reviews.find({ rating: { $lte: 4 } });=> <=4
+
+// db.reviews.find({ rating: { $gt: 4 } });=> >4
+// db.reviews.find({ rating: { $gte: 4 } }); //=> >=4
+db.reviews.find({ $and: [{ rating: { $gt: 1 } }, { rating: { $lte: 4 } }] });

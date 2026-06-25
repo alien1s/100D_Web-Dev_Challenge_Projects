@@ -1,0 +1,5 @@
+use("restaurant-reviews-db");
+
+// db.types.find();
+// db.restaurants.find();
+db.reviews.find();
