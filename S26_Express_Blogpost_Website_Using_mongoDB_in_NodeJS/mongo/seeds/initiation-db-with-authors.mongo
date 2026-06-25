@@ -1,0 +1,6 @@
+use("blog-post");
+
+db.authors.insertMany([
+  { name: "Saif Eldin Abdelrahman", email: "saif.at.genius@gmail.com" },
+  { name: "Mamdoo7", email: "mamdoo7@gmail.com" },
+]);
