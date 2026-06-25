@@ -1,0 +1,36 @@
+use("restaurant-reviews-db");
+
+db.reviews.insertMany([
+  {
+    reviewerName: "Hans S.",
+    rating: 4,
+    text: "Crispy pork knuckle (Schweinshaxe) was massive and delicious. Great Hefeweizen beer too.",
+    date: new Date("2026-06-24T18:45:00Z"),
+    restaurant: {
+      id: ObjectId("6a3d3f019e6a8efc87046b5a"),
+      name: "Gasthof Zum Bären",
+    },
+  },
+
+  {
+    reviewerName: "Marco R.",
+    rating: 5,
+    text: "The wood-fired sourdough crust is sensational. True Neapolitan style!",
+    date: new Date("2026-06-23T12:00:00Z"),
+    restaurant: {
+      id: ObjectId("6a3d3f019e6a8efc87046b5b"),
+      name: "Bella Vista Pizzeria",
+    },
+  },
+
+  {
+    reviewerName: "Cindy Lou",
+    rating: 5,
+    text: "Best blueberry pancakes and bottomless black coffee in the city. Classic 1950s booth vibe.",
+    date: new Date("2026-06-25T08:30:00Z"),
+    restaurant: {
+      id: ObjectId("6a3d3f019e6a8efc87046b5c"),
+      name: "Liberty Bell Diner",
+    },
+  },
+]);

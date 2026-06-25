@@ -1,0 +1,7 @@
+use("restaurant-reviews-db");
+
+db.types.insertMany([
+  { name: "German" },
+  { name: "Italian" },
+  { name: "American" },
+]);

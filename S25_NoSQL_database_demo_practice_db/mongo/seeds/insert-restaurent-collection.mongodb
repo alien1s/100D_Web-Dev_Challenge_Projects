@@ -1,0 +1,48 @@
+use("restaurant-reviews-db");
+
+db.restaurants.insertMany([
+  {
+    name: "Gasthof Zum Bären",
+    address: {
+      street: "Platzl",
+      number: "9",
+      city: "Munich",
+      postalCode: "80331",
+      country: "Germany",
+    },
+    type: {
+      typeId: ObjectId("6a3d3b4c9e5b019a5b57b285"),
+      name: "German",
+    },
+  },
+
+  {
+    name: "Bella Vista Pizzeria",
+    address: {
+      street: "Via dei Tribunali",
+      number: "32",
+      city: "Naples",
+      postalCode: "80138",
+      country: "Italy",
+    },
+    type: {
+      typeId: ObjectId("6a3d3b4c9e5b019a5b57b286"),
+      name: "Italian",
+    },
+  },
+
+  {
+    name: "Liberty Bell Diner",
+    address: {
+      street: "Route 66 Hwy",
+      number: "1950",
+      city: "Chicago",
+      postalCode: "60601",
+      country: "USA",
+    },
+    type: {
+      typeId: ObjectId("6a3d3b4c9e5b019a5b57b287"),
+      name: "American",
+    },
+  },
+]);
