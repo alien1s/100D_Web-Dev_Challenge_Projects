@@ -64,8 +64,8 @@ router.get("/posts/:id", async function (req, res) {
     return res.status(404).render("404");
   }
 
-  post.hummanReadableDate = post.date.toLocaleDateString("en-US", {
-    weakday: "long",
+  post.humanReadableDate = post.date.toLocaleDateString("en-US", {
+    weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -102,6 +102,15 @@ router.post("/posts/:id/edit", async function (req, res) {
       },
     );
 
+  res.redirect("/posts");
+});
+
+router.post("/posts/:id/delete", async function (req, res) {
+  const postId = new ObjectId(req.params.id);
+  const result = await db
+    .getDb()
+    .collection("posts")
+    .deleteOne({ _id: postId });
   res.redirect("/posts");
 });
 
