@@ -21,6 +21,23 @@ function createCommentsList(comments) {
   return commentsListElement;
 }
 
+const collapseButtonListElement = document.createElement("button");
+collapseButtonListElement.id = "collapse-comments-btn";
+collapseButtonListElement.className = "btn btn-alt";
+collapseButtonListElement.textContent = "Collapse Comments";
+
+function collapseCommentList() {
+  commentSectionElement.innerHTML = `
+    <p>
+      This post might have comments. You can load them if you want to view them.
+    </p>
+    <button id="load-comments-btn" class="btn btn-alt" data-postid="<%= post._id %>">Load Comments</button>
+  `;
+
+  const newLoadCommentsBtn = document.getElementById("load-comments-btn");
+  newLoadCommentsBtn.addEventListener("click", fetchCommentsForPost);
+}
+
 async function fetchCommentsForPost() {
   const postId = loadCommentsBtnElement.dataset.postid;
   const response = await fetch(`/posts/${postId}/comments`);
@@ -30,7 +47,10 @@ async function fetchCommentsForPost() {
   if (responseData && responseData.length > 0) {
     const commentsListElement = createCommentsList(responseData);
     commentSectionElement.innerHTML = "";
-    commentSectionElement.appendChild(commentsListElement);
+    commentSectionElement.append(
+      commentsListElement,
+      collapseButtonListElement,
+    );
   } else {
     commentSectionElement.firstElementChild.textContent =
       "We could not found any comment, maybe add some!";
@@ -65,4 +85,5 @@ async function saveComment(event) {
 }
 
 loadCommentsBtnElement.addEventListener("click", fetchCommentsForPost);
+collapseButtonListElement.addEventListener("click", collapseCommentList);
 commentFormElement.addEventListener("submit", saveComment);
