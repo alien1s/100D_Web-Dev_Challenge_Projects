@@ -83,10 +83,10 @@ router.post("/login", async function (req, res) {
     return res.redirect("/login");
   }
 
-  req.session.user({
+  req.session.user = {
     id: existingUser._id.toString(),
     email: existingUser.email,
-  });
+  };
   req.session.isAuthenticated = true;
   req.session.save(function () {
     res.redirect("/admin");
