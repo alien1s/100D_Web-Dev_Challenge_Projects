@@ -41,15 +41,16 @@ app.use(async function (req, res, next) {
   if (!user || !isAuth) {
     return next();
   }
-  console.log(user);
   const userDoc = await db
     .getDb()
     .collection("users")
     .findOne({ _id: new ObjectId(user.id) });
   const isAdmin = userDoc.isAdmin;
+  const email = userDoc.email;
 
   res.locals.isAuth = isAuth;
   res.locals.isAdmin = isAdmin;
+  res.locals.email = email;
 
   next();
 });
