@@ -2,6 +2,8 @@ const express = require("express");
 
 const bcrypt = require("bcryptjs");
 
+const { ObjectId } = require("mongodb");
+
 const db = require("../data/database");
 
 const router = express.Router();
@@ -21,7 +23,7 @@ router.get("/signup", function (req, res) {
       password: "",
     };
   }
-  res.session.inputData = null;
+  req.session.inputData = null;
   res.render("signup", { inputData: sessionInputData });
 });
 
@@ -31,7 +33,6 @@ router.get("/login", function (req, res) {
 
 router.post("/signup", async function (req, res) {
   const userData = req.body;
-
   const enterdEmail = userData.email;
   const enterdConfirmedEmail = userData["confirm-email"];
   const enterdPassword = userData.password;
@@ -114,11 +115,28 @@ router.post("/login", async function (req, res) {
   });
 });
 
-router.get("/admin", function (req, res) {
+router.get("/admin", async function (req, res) {
   if (!req.session.isAuthenticated) {
     return res.status(401).render("401");
   }
+
+  const user = await db
+    .getDb()
+    .collection("users")
+    .findOne({ _id: ObjectId.createFromHexString(req.session.user.id) });
+
+  if (!user || !user.isAdmin) {
+    return res.status(403).render("403");
+  }
   res.render("admin");
+});
+
+router.get("/profile", function (req, res) {
+  if (!req.session.isAuthenticated) {
+    return res.status(401).render("401");
+  }
+
+  res.render("profile");
 });
 
 router.post("/logout", function (req, res) {
