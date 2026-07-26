@@ -12,7 +12,8 @@ router.get('/discussion', async function (req, res) {
   let filter = '';
 
   if (req.query.author) {
-    filter = `WHERE author = "${req.query.author}"`; 
+    //filter = `WHERE author = "${req.query.author}"`; // the attacker may insert in the filter input field content like this (sword"; DROP TABLE comments; SELECT * FROM comments WHERE author = "Mamd007" )
+    filter = `WHERE author = ?`;
   }
 
   const query = `SELECT * FROM comments ${filter}`;
