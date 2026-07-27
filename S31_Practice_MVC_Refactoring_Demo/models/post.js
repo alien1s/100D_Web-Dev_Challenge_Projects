@@ -12,11 +12,33 @@ class Post {
     }
   }
 
+  static async fetchAll() {
+    const result = await db.getDb().collection("posts").find().toArray();
+    return result;
+  }
+
+  async fetch() {
+    if (!this.id) {
+      return;
+    }
+
+    const postDoc = await db
+      .getDb()
+      .collection("posts")
+      .findOne({ _id: this.id });
+
+    if (!postDoc) {
+      return;
+    }
+    this.title = postDoc.title;
+    this.content = postDoc.content;
+  }
+
   async save() {
     let result;
 
     if (this.id) {
-      const result = await db
+      result = await db
         .getDb()
         .collection("posts")
         .updateOne(
@@ -24,7 +46,7 @@ class Post {
           { $set: { title: this.title, content: this.content } },
         );
     } else {
-      const result = await db.getDb().collection("posts").insertOne({
+      result = await db.getDb().collection("posts").insertOne({
         title: this.title,
         content: this.content,
       });
