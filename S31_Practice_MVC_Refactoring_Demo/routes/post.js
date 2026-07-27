@@ -1,10 +1,13 @@
 const express = require("express");
 
 const postController = require("../controllers/post-controller");
+const guardRoute = require("../middlewares/auth-protection-middleware");
 
 const router = express.Router();
 
 router.get("/", postController.getHome);
+
+router.use(guardRoute);
 
 router.get("/admin", postController.getAdmin);
 
