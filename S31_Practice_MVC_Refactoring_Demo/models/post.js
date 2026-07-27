@@ -27,9 +27,6 @@ class Post {
       .collection("posts")
       .findOne({ _id: this.id });
 
-    if (!postDoc) {
-      return;
-    }
     this.title = postDoc.title;
     this.content = postDoc.content;
   }
