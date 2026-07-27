@@ -7,6 +7,8 @@ const csrf = require("csurf");
 const db = require("./data/database");
 const sessionConfig = require("./config/session");
 
+const authMiddleware = require("./middlewares/auth-middleware");
+
 const authRoutes = require("./routes/auth");
 const blogRoutes = require("./routes/blog");
 
@@ -23,18 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(session(sessionConfig.createSessionConfig(mongodbSessionStore)));
 app.use(csrf());
 
-app.use(async function (req, res, next) {
-  const user = req.session.user;
-  const isAuth = req.session.isAuthenticated;
-
-  if (!user || !isAuth) {
-    return next();
-  }
-
-  res.locals.isAuth = isAuth;
-
-  next();
-});
+app.use(authMiddleware);
 
 app.use(authRoutes);
 app.use(blogRoutes);
