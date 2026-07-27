@@ -8,7 +8,7 @@ const db = require("./data/database");
 const sessionConfig = require("./config/session");
 
 const authRoutes = require("./routes/auth");
-const blogRoutes = require("./routes/blog");
+const postRoutes = require("./routes/post");
 
 const authMiddleware = require("./middlewares/auth-middleware");
 const csrfTokenMiddleware = require("./middlewares/csrf-tokens-middleware");
@@ -30,7 +30,7 @@ app.use(authMiddleware);
 app.use(csrfTokenMiddleware);
 
 app.use(authRoutes);
-app.use(blogRoutes);
+app.use(postRoutes);
 
 app.use(function (error, req, res, next) {
   res.render("500");

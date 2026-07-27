@@ -13,7 +13,7 @@ function getSessionErrorData(req, defaultValue) {
   return sessionInputData;
 }
 
-function flahErrorToSession(req, data, action) {
+function flashErrorToSession(req, data, action) {
   req.session.inputData = {
     hasError: true,
     ...data,
@@ -23,5 +23,5 @@ function flahErrorToSession(req, data, action) {
 
 module.exports = {
   getSessionErrorData: getSessionErrorData,
-  flahErrorToSession: flahErrorToSession,
+  flashErrorToSession: flashErrorToSession,
 };

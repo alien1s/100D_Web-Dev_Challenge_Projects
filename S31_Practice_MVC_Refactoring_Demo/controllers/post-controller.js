@@ -29,7 +29,7 @@ async function createPost(req, res) {
   const enteredContent = req.body.content;
 
   if (!validation.postIsValid(enteredTitle, enteredContent)) {
-    validationSession.flahErrorToSession(
+    validationSession.flashErrorToSession(
       req,
       {
         message: "Invalid input - please check your data.",
@@ -74,7 +74,7 @@ async function updatePost(req, res) {
   const enteredContent = req.body.content;
 
   if (!validation.postIsValid(enteredTitle, enteredContent)) {
-    validationSession.flahErrorToSession(
+    validationSession.flashErrorToSession(
       req,
       {
         message: "Invalid input - please check your data.",
