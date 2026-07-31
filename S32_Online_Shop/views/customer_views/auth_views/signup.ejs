@@ -1,20 +1,47 @@
-<%- includes('../includes/head',{pageTitle: Signup}) %>
+<%- include('../includes/head',{pageTitle: 'Signup'}) %>
 
 </head>
 <body>
-    <%- includes('../includes/header') %>
+    <%- include('../includes/header') %>
     <main>
         <h1>Create New Account</h1>
         <form action="" method="">
-            <label for="user-name"></label>
-            <input type="text" id="" name="user-name">
-            <label for="user-email"></label>
-            <input type="email" id="" name="user-email">
-            <label for="user-password"></label>
-            <input type="password" id="" name="user-password">
-            <button>Sgin Up</button>
+            <p>
+                <label for="email">E-Mail</label>
+                <input type="email" id="email" name= "email" required>
+
+            </p>
+            <p>
+                <label for="confirm-email">Confirm E-Mail</label>
+                <input type="email" id="confirm-email" name="confirm-email" required>
+            </p>
+            <p>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" minlength="6" required>
+
+            </p>
+            <hr>
+            <p>
+                <label for="full-name">Full Name</label>
+                <input type="text" id="full-name" name="full-name" required>
+            </p>
+
+            <p>
+                <label for="street">Bulding&Street</label>
+                <input type="text" id="street" name="street" required>
+            </p>
+            <p>
+                <label for="postal">Postal Code</label>
+                <input type="text" id="postal" minlength="5" maxlength="5" name="postal" required>                
+            </p>
+            <p>
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>                
+            </p>
+            <button class="btn">Create Account</button>
+            <p id="switch-form"><a href="/login">Login insted</a></p>
         </form>
 
     </main>
 
-<%- includes('../includes/footer') %>    
+<%- include('../includes/footer') %>    
