@@ -4,9 +4,10 @@ const express = require("express");
 
 const csrf = require("csurf");
 
-const addCsrfTokenMiddleware = require("./middlewares/csrf-tokens.middleware");
-
 const db = require("./data/database");
+
+const addCsrfTokenMiddleware = require("./middlewares/csrf-tokens.middleware");
+const serverSideErrorHandler = require("./middlewares/server-side-error-handling.middleware");
 
 const authRoutes = require("./routes/auth.routes");
 
@@ -19,10 +20,12 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
 const csrfProtection = csrf();
-app.use(csrfProtection);// parse and create csrf for request
+app.use(csrfProtection); // parse and create csrf for request
 app.use(addCsrfTokenMiddleware); // distribute csrf for the post views
 
 app.use(authRoutes);
+
+app.use(serverSideErrorHandler);
 
 db.connectToDatabase()
   .then(function () {
