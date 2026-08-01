@@ -1,8 +1,10 @@
 const path = require("path");
 
 const express = require("express");
-
+const session = require("express-session");
 const csrf = require("csurf");
+
+const createSessionConfig = require("./config/session.config");
 
 const db = require("./data/database");
 
@@ -18,6 +20,10 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
+
+const sessionStore = createSessionConfig();
+
+app.use(session(sessionStore));
 
 const csrfProtection = csrf();
 app.use(csrfProtection); // parse and create csrf for request
