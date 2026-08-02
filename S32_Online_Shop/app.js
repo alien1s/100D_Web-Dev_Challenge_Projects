@@ -11,7 +11,9 @@ const db = require("./data/database");
 const addCsrfTokenMiddleware = require("./middlewares/csrf-tokens.middleware");
 const serverSideErrorHandler = require("./middlewares/server-side-error-handling.middleware");
 
-const authRoutes = require("./routes/auth.routes");
+const baseRoutes = require("./routes/base.route");
+const authRoutes = require("./routes/auth.route");
+const productRoutes = require("./routes/product.route");
 
 const app = express();
 
@@ -29,7 +31,9 @@ const csrfProtection = csrf();
 app.use(csrfProtection); // parse and create csrf for request
 app.use(addCsrfTokenMiddleware); // distribute csrf for the post views
 
+app.use(baseRoutes);
 app.use(authRoutes);
+app.use(productRoutes);
 
 app.use(serverSideErrorHandler);
 
