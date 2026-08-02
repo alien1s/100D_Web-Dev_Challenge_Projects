@@ -25,12 +25,15 @@ class User {
     });
   }
 
-  getUserWithSameEmail() {
-    return db.getDb().collection("users").findOne({ email: this.email });
-  }
-
-  hasMatchingPassword(hashPassword) {
-    return bcrypt.compare(this.password, hashPassword);
+  login() {
+    return {
+      getUserWithSameEmail: () => {
+        return db.getDb().collection("users").findOne({ email: this.email });
+      },
+      hasMatchingPassword: (hashPassword) => {
+        return bcrypt.compare(this.password, hashPassword);
+      },
+    };
   }
 }
 

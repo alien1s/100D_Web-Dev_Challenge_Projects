@@ -2,12 +2,10 @@ const User = require("../models/user.model");
 const authUtil = require("../util/auth.util");
 
 function getSignup(req, res) {
-  //handling logic
   res.render("customer_views/auth_views/signup");
 }
 
 async function signup(req, res) {
-  //handling logic......
   const user = new User(
     req.body.email,
     req.body.password,
@@ -23,20 +21,19 @@ async function signup(req, res) {
 }
 
 function getLogin(req, res) {
-  //handling logic
   res.render("customer_views/auth_views/login");
 }
 
 async function login(req, res) {
   const user = new User(req.body.email, req.body.password);
-  const existingUser = await user.getUserWithSameEmail();
+  const existingUser = await user.login().getUserWithSameEmail();
 
   if (!existingUser) {
     res.redirect("/login");
     return;
   }
 
-  const passwordIsCorrect = await user.hasMatchingPassword(
+  const passwordIsCorrect = await user.login().hasMatchingPassword(
     existingUser.password,
   );
 
@@ -50,9 +47,15 @@ async function login(req, res) {
   });
 }
 
+function logout(req, res) {
+  authUtil.destroyUserAuthSession(req);
+  res.redirect("/");
+}
+
 module.exports = {
   getSignup: getSignup,
   getLogin: getLogin,
   signup: signup,
   login: login,
+  logout: logout,
 };

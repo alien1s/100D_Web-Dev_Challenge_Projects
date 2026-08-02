@@ -1,39 +1,51 @@
 const path = require("path");
 
 const express = require("express");
-const session = require("express-session");
 const csrf = require("csurf");
+const session = require("express-session");
 
-const createSessionConfig = require("./config/session.config");
+//------
 
 const db = require("./data/database");
 
+const createSessionConfig = require("./config/session.config");
+
 const addCsrfTokenMiddleware = require("./middlewares/csrf-tokens.middleware");
 const serverSideErrorHandler = require("./middlewares/server-side-error-handling.middleware");
+const checkAuthStatus = require("./middlewares/check-auth.middleware");
 
 const baseRoutes = require("./routes/base.route");
 const authRoutes = require("./routes/auth.route");
-const productRoutes = require("./routes/product.route");
+const productsRoutes = require("./routes/products.route");
+
+//-----------
 
 const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+//-----------
+
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
 const sessionStore = createSessionConfig();
-
 app.use(session(sessionStore));
 
 const csrfProtection = csrf();
 app.use(csrfProtection); // parse and create csrf for request
 app.use(addCsrfTokenMiddleware); // distribute csrf for the post views
 
+app.use(checkAuthStatus);
+
+//.......
+
 app.use(baseRoutes);
 app.use(authRoutes);
-app.use(productRoutes);
+app.use(productsRoutes);
+
+//..........
 
 app.use(serverSideErrorHandler);
 
