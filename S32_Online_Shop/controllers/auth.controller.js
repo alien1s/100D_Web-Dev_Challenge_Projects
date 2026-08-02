@@ -5,7 +5,7 @@ function getSignup(req, res) {
   res.render("customer_views/auth_views/signup");
 }
 
-async function signup(req, res) {
+async function signup(req, res, next) {
   const user = new User(
     req.body.email,
     req.body.password,
@@ -14,8 +14,13 @@ async function signup(req, res) {
     req.body.postal,
     req.body.city,
   );
-
-  await user.signup();
+  try {
+    await user.signup();
+  } catch (error) {
+    console.log(error);
+    next(error);
+    return;
+  }
 
   res.redirect("/login");
 }
@@ -24,18 +29,27 @@ function getLogin(req, res) {
   res.render("customer_views/auth_views/login");
 }
 
-async function login(req, res) {
+async function login(req, res, next) {
   const user = new User(req.body.email, req.body.password);
-  const existingUser = await user.login().getUserWithSameEmail();
+  
+  let existingUser;
+
+  try {
+    existingUser = await user.login().getUserWithSameEmail();
+  } catch (error) {
+    console.log(error);
+    next(error);
+    return;
+  }
 
   if (!existingUser) {
     res.redirect("/login");
     return;
   }
 
-  const passwordIsCorrect = await user.login().hasMatchingPassword(
-    existingUser.password,
-  );
+  const passwordIsCorrect = await user
+    .login()
+    .hasMatchingPassword(existingUser.password);
 
   if (!passwordIsCorrect) {
     res.redirect("/login");
