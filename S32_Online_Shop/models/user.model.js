@@ -3,15 +3,29 @@ const bcrypt = require("bcryptjs");
 const db = require("../data/database");
 
 class User {
-  constructor(email, password, fullname, street, postal, city) {
-    this.email = email;
-    this.password = password;
-    this.name = fullname;
+  constructor(userInput) {
+    this.email = userInput.email;
+    this.confirmedEmail = userInput.confirmedEmail;
+    this.password = userInput.password;
+    this.name = userInput.fullname;
     this.address = {
-      street: street,
-      postalCode: postal,
-      city: city,
+      street: userInput.street,
+      postalCode: userInput.postal,
+      city: userInput.city,
     };
+  }
+
+  getUserWithSameEmail() {
+    return db.getDb().collection("users").findOne({ email: this.email });
+  }
+
+  async existsAlready() {
+    const existingUser = await this.getUserWithSameEmail();
+
+    if (existingUser) {
+      return true;
+    }
+    return false;
   }
 
   async signup() {
@@ -24,16 +38,8 @@ class User {
       address: this.address,
     });
   }
-
-  login() {
-    return {
-      getUserWithSameEmail: () => {
-        return db.getDb().collection("users").findOne({ email: this.email });
-      },
-      hasMatchingPassword: (hashPassword) => {
-        return bcrypt.compare(this.password, hashPassword);
-      },
-    };
+  hasMatchingPassword(hashPasswordFromDB) {
+    return bcrypt.compare(this.password, hashPasswordFromDB);
   }
 }
 

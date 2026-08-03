@@ -12,39 +12,45 @@
     <%- include('../../shared/includes/header') %>
     <main>
         <h1>Create New Account</h1>
+            <% if (holdData.hasError) { %>
+            <section class="alert">
+                <h2>Invalid Input</h2>
+                <p><%= holdData.errorMessage %></p>
+            </section>
+            <% } %>        
         <form action="/signup" method="POST">
             <input type="hidden" name= "_csrf" value="<%= csrfToken %>">
             <p>
                 <label for="email">E-Mail</label>
-                <input type="email" id="email" name= "email" required>
+                <input type="email" id="email" name= "email" value="<%= holdData.userInputData.email %>" required>
 
             </p>
             <p>
                 <label for="confirm-email">Confirm E-Mail</label>
-                <input type="email" id="confirm-email" name="confirm-email" required>
+                <input type="email" id="confirm-email" name="confirm-email" value="<%= holdData.userInputData.confirmedEmail %>" required>
             </p>
             <p>
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" minlength="6" required>
+                <input type="password" id="password" name="password" value="<%= holdData.userInputData.password %>" minlength="6" required>
 
             </p>
             <hr>
             <p>
                 <label for="fullname">Full Name</label>
-                <input type="text" id="fullname" name="fullname" required>
+                <input type="text" id="fullname" name="fullname" value="<%= holdData.userInputData.fullname %>" required>
             </p>
 
             <p>
                 <label for="street">Bulding&Street</label>
-                <input type="text" id="street" name="street" required>
+                <input type="text" id="street" name="street" value="<%= holdData.userInputData.street %>" required>
             </p>
             <p>
                 <label for="postal">Postal Code</label>
-                <input type="text" id="postal" minlength="5" maxlength="5" name="postal" required>                
+                <input type="text" id="postal" name="postal" value="<%= holdData.userInputData.postal %>" minlength="5" maxlength="5" required>                
             </p>
             <p>
                 <label for="city">City</label>
-                <input type="text" id="city" name="city" required>                
+                <input type="text" id="city" name="city" value="<%= holdData.userInputData.city %>" required>                
             </p>
             <button class="btn">Create Account</button>
             <p id="switch-form"><a href="/login">Login insted</a></p>
