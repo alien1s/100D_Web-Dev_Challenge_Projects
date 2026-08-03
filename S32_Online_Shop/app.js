@@ -5,10 +5,9 @@ const csrf = require("csurf");
 const session = require("express-session");
 
 //------
+const createSessionConfig = require("./config/session.config");
 
 const db = require("./data/database");
-
-const createSessionConfig = require("./config/session.config");
 
 const addCsrfTokenMiddleware = require("./middlewares/csrf-tokens.middleware");
 const serverSideErrorHandler = require("./middlewares/server-side-error-handling.middleware");

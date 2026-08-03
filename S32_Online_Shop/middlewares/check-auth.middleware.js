@@ -3,11 +3,13 @@ function checkAuthStatus(req, res, next) {
 
   if (!uid) {
     res.locals.isAuth = false;
+    res.locals.isAdmin = false;
     return next();
   }
 
   res.locals.uid = uid;
   res.locals.isAuth = true;
+  res.locals.isAdmin = req.session.isAdmin;
 
   next();
 }
