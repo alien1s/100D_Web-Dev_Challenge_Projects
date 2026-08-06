@@ -74,7 +74,7 @@ main {
   height: calc(100vh - 5rem);
   width: 60%;
   background-color: var(--color-gray-700);
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
 }
@@ -121,6 +121,12 @@ main {
   .nav-items button {
     color: var(--color-primary-500);
     border-color: var(--color-primary-500);
+  }
+
+  .nav-items button:hover,
+  .nav-items button:active {
+    background-color: var(--color-primary-500);
+    color: var(--color-primary-500-bg);
   }
 
   #mobile-menu-btn {
