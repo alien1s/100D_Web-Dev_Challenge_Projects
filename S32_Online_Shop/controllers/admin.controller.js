@@ -4,12 +4,15 @@ function getProducts(req, res) {
 function getAddingNewProduct(req, res) {
   res.render("admin_views/products/add-product");
 }
-function creatingNewProduct(req, res) {
-  res.redirect("/products/new");
+function createNewProduct(req, res) {
+  console.log(req.body);
+  console.log(req.file);
+
+  res.redirect("/admin/products");
 }
 
 module.exports = {
   getProducts: getProducts,
   getAddingNewProduct: getAddingNewProduct,
-  creatingNewProduct: creatingNewProduct,
+  createNewProduct: createNewProduct,
 };
