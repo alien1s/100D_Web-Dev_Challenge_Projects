@@ -67,6 +67,10 @@ main {
   background-color: var(--color-gray-100);
 }
 
+#mobile-menu.open {
+  display: flex;
+}
+
 #mobile-menu {
   position: fixed;
   top: 5rem;
