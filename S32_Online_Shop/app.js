@@ -28,6 +28,7 @@ app.set("views", path.join(__dirname, "views"));
 //-----------
 
 app.use(express.static("public"));
+app.use("/products/assets", express.static("products_data"));
 app.use(express.urlencoded({ extended: false }));
 
 const sessionStore = createSessionConfig();

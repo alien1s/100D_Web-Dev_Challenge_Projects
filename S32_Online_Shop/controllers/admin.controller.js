@@ -1,11 +1,21 @@
 const Product = require("../models/product.model");
 
-function getProducts(req, res) {
-  res.render("admin_views/products/all-products-admin");
+async function getProducts(req, res, next) {
+  try {
+    const products = await Product.fetchAll();
+    res.render("admin_views/products/all-products-admin", {
+      products: products,
+    });
+  } catch (error) {
+    next(error);
+    return;
+  }
 }
+
 function getAddingNewProduct(req, res) {
   res.render("admin_views/products/add-product");
 }
+
 async function createNewProduct(req, res, next) {
   const product = new Product({
     ...req.body,

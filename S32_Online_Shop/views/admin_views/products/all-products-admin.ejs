@@ -10,7 +10,14 @@
             <p><a class="btn" href="/admin/products/new">Add Product</a></p>
         </section>
         <section>
-            <p>A list of products .....</p>
+            <h2>Porducts List</h2>
+            <ul>
+               <% for(const product of products) {%> 
+                    <l>
+                        <%- include('includes/product-item', {product: product}) %>
+                    </l>
+                <% } %>
+            </ul>
         </section>
 
 

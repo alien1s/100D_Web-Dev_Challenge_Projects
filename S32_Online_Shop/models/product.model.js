@@ -6,9 +6,19 @@ class Product {
     this.summary = productData.summary;
     this.price = +productData.price;
     this.description = productData.description;
-    this.imageName = productData.image;
+    this.image = productData.image;
     this.imagePath = `product_data/images/${productData.image}`;
     this.imageUrl = `/products/assets/images/${productData.image}`;
+    if (productData._id) {
+      this.id = productData._id.toString();
+    }
+  }
+
+  static async fetchAll() {
+    const products = await db.getDb().collection("products").find().toArray();
+    return products.map(function (productDoc) {
+      return new Product(productDoc);
+    });
   }
 
   async save() {
@@ -17,7 +27,7 @@ class Product {
       summary: this.summary,
       price: this.price,
       description: this.description,
-      imageName: this.imageName,
+      image: this.image,
     };
 
     await db.getDb().collection("products").insertOne(productData);
