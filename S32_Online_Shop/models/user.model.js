@@ -15,6 +15,17 @@ class User {
     };
   }
 
+  async signup() {
+    const hashPassword = await bcrypt.hash(this.password, 12);
+
+    await db.getDb().collection("users").insertOne({
+      email: this.email,
+      password: hashPassword,
+      name: this.name,
+      address: this.address,
+    });
+  }
+
   getUserWithSameEmail() {
     return db.getDb().collection("users").findOne({ email: this.email });
   }
@@ -28,16 +39,6 @@ class User {
     return false;
   }
 
-  async signup() {
-    const hashPassword = await bcrypt.hash(this.password, 12);
-
-    await db.getDb().collection("users").insertOne({
-      email: this.email,
-      password: hashPassword,
-      name: this.name,
-      address: this.address,
-    });
-  }
   hasMatchingPassword(hashPasswordFromDB) {
     return bcrypt.compare(this.password, hashPasswordFromDB);
   }
