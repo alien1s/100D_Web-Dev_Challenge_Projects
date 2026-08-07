@@ -3,12 +3,16 @@
     src="<%= product.imageUrl %>"
     alt="<%= product.title %>"
   />
-  <h3><%= product.title %></h3>
-  <a
-    class="btn btn-alt"
-    href="/admin/products/<%= product.id %>"
-  >
-    View&Edit
-  </a>
-  <button class="btn">Delete</button>
+  <div class="product-item-content">
+    <h3><%= product.title %></h3>
+    <div class="product-item-actions">
+      <a
+        class="btn btn-alt"
+        href="/admin/products/<%= product.id %>"
+      >
+        View&Edit
+      </a>
+      <button class="btn">Delete</button>
+    </div>
+  </div>
 </article>
