@@ -15,11 +15,11 @@ class Product {
   }
 
   updateImageData() {
-    this.imagePath = `product_data/images/${this.image}`;
+    this.imagePath = `products_data/images/${this.image}`;
     this.imageUrl = `/products/assets/images/${this.image}`;
   }
 
-  static async fetchByTd(productId) {
+  static async fetchById(productId) {
     let prodId;
     try {
       prodId = new mongoDb.ObjectId(productId);
@@ -77,6 +77,18 @@ class Product {
   replaceImage(newImage) {
     this.image = newImage;
     this.updateImageData();
+  }
+
+  static async delete(productId) {
+    let product;
+    try {
+      product = await Product.fetchById(productId);
+      const prodId = new mongoDb.ObjectId(product.id);
+      await db.getDb().collection("products").deleteOne({ _id: prodId });
+    } catch (error) {
+      error.code = 404;
+      throw error;
+    }
   }
 }
 

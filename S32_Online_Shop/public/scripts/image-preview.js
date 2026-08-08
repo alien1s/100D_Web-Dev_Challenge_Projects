@@ -17,4 +17,6 @@ function updateImagePreview(event) {
   imagePreviewElement.style.display = "block";
 }
 
-imagePickerElement.addEventListener("change", updateImagePreview);
+if (imagePickerElement) {
+  imagePickerElement.addEventListener("change", updateImagePreview);
+}

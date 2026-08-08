@@ -34,7 +34,7 @@ async function createNewProduct(req, res, next) {
 
 async function getUpdateProduct(req, res, next) {
   try {
-    const productData = await Product.fetchByTd(req.params.id);
+    const productData = await Product.fetchById(req.params.id);
     res.render("admin_views/products/update-product", { product: productData });
   } catch (error) {
     next(error);
@@ -51,13 +51,24 @@ async function updateProduct(req, res) {
     product.replaceImage(req.file.filename);
   }
   try {
-   await product.save();
+    await product.save();
   } catch (error) {
     next(error);
     return;
   }
 
-  res.redirect('/admin/products')
+  res.redirect("/admin/products");
+}
+
+async function deleteProduct(req, res, next) {
+  try {
+    await Product.delete(req.params.id);
+  } catch (error) {
+    next(error);
+    return;
+  }
+
+  res.json({ message: "Product was deleted!" });
 }
 
 module.exports = {
@@ -66,4 +77,5 @@ module.exports = {
   createNewProduct: createNewProduct,
   getUpdateProduct: getUpdateProduct,
   updateProduct: updateProduct,
+  deleteProduct: deleteProduct,
 };

@@ -12,7 +12,13 @@
       >
         View&Edit
       </a>
-      <button class="btn">Delete</button>
+      <button
+        class="btn"
+        data-productid="<%= product.id %>"
+        data-csrf="<%= csrfToken %>"
+      >
+        Delete
+      </button>
     </div>
   </div>
 </article>
