@@ -10,7 +10,7 @@ const createSessionConfig = require("./config/session.config");
 const db = require("./data/database");
 
 const addCsrfTokenMiddleware = require("./middlewares/csrf-tokens.middleware");
-const serverSideErrorHandler = require("./middlewares/server-side-error-handling.middleware");
+const errorHandler = require("./middlewares/error-handling.middleware");
 const checkAuthStatus = require("./middlewares/check-auth.middleware");
 
 const baseRoutes = require("./routes/base.route");
@@ -49,7 +49,7 @@ app.use("/admin", adminRoutes);
 
 //..........
 
-app.use(serverSideErrorHandler);
+app.use(errorHandler);
 
 db.connectToDatabase()
   .then(function () {
