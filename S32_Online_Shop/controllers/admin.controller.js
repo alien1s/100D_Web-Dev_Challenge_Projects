@@ -32,8 +32,21 @@ async function createNewProduct(req, res, next) {
   res.redirect("/admin/products");
 }
 
+async function getUpdateProduct(req, res, next) {
+  try {
+    const productData = await Product.fetchByTd(req.params.id);
+    res.render("admin_views/products/update-product", { product: productData });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function updateProduct(req, res) {}
+
 module.exports = {
   getProducts: getProducts,
   getAddingNewProduct: getAddingNewProduct,
   createNewProduct: createNewProduct,
+  getUpdateProduct: getUpdateProduct,
+  updateProduct: updateProduct,
 };
