@@ -8,11 +8,15 @@ class Product {
     this.price = +productData.price;
     this.description = productData.description;
     this.image = productData.image;
-    this.imagePath = `product_data/images/${productData.image}`;
-    this.imageUrl = `/products/assets/images/${productData.image}`;
+    this.updateImageData();
     if (productData._id) {
       this.id = productData._id.toString();
     }
+  }
+
+  updateImageData() {
+    this.imagePath = `product_data/images/${this.image}`;
+    this.imageUrl = `/products/assets/images/${this.image}`;
   }
 
   static async fetchByTd(productId) {
@@ -35,7 +39,7 @@ class Product {
       throw error;
     }
 
-    return product;
+    return new Product(product);
   }
 
   static async fetchAll() {
@@ -54,7 +58,25 @@ class Product {
       image: this.image,
     };
 
-    await db.getDb().collection("products").insertOne(productData);
+    if (this.id) {
+      const prodId = new mongoDb.ObjectId(this.id);
+
+      if (!this.image) {
+        delete productData.image;
+      }
+
+      await db
+        .getDb()
+        .collection("products")
+        .updateOne({ _id: prodId }, { $set: productData });
+    } else {
+      await db.getDb().collection("products").insertOne(productData);
+    }
+  }
+
+  replaceImage(newImage) {
+    this.image = newImage;
+    this.updateImageData();
   }
 }
 

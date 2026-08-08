@@ -21,7 +21,7 @@
       name="image"
       accept="image/png, image/jpg"
       value="<%= %>"
-      required
+      <% if(imageRequired){%>required<%}%>
     />
   </p>
   <p>
@@ -54,8 +54,7 @@
       name="description"
       required
       rows="10"
-    ><%= product.description %></textarea
-    >
+    ><%= product.description %></textarea>
   </p>
   <button
     type="reset"
