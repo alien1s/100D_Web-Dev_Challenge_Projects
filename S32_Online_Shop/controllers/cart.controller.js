@@ -5,9 +5,6 @@ async function addCartItem(req, res, next) {
   let product;
   try {
     product = await Product.fetchById(req.body.productId);
-    if (!product || isNaN(Number(product.price))) {
-      return res.status(400).json({ message: "Invalid product" });
-    }
   } catch (error) {
     next(error);
     return;
