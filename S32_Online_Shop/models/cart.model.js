@@ -1,11 +1,13 @@
 class Cart {
-  constructor(items = [], totalQuantity, totalPrice) {
+  constructor(items = [], totalQuantity = 0, totalPrice = 0) {
     this.items = items;
     this.totalQuantity = totalQuantity;
     this.totalPrice = totalPrice;
   }
 
   addItem(product) {
+    this.totalQuantity = Number(this.totalQuantity) || 0;
+    this.totalPrice = Number(this.totalPrice) || 0;
     const cartItem = {
       product: product,
       quantity: 1,
@@ -14,10 +16,9 @@ class Cart {
 
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i];
-
       if (item.product.id === product.id) {
         cartItem.quantity = cartItem.quantity + 1;
-        cartItem.totalPrice = cart.totalPrice + product.price;
+        cartItem.totalPrice = cartItem.totalPrice + product.price;
         this.items[i] = cartItem;
 
         this.totalQuantity++;
@@ -26,7 +27,7 @@ class Cart {
       }
     }
 
-    this.items.push = cartItem;
+    this.items.push(cartItem);
     this.totalQuantity++;
     this.totalPrice += product.price;
   }
