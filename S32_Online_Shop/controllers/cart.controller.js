@@ -1,6 +1,10 @@
 const Product = require("../models/product.model");
 const Cart = require("../models/cart.model");
 
+function getCartItem(req, res) {
+  res.render("customer_views/cart_views/cart");
+}
+
 async function addCartItem(req, res, next) {
   let product;
   try {
@@ -22,5 +26,6 @@ async function addCartItem(req, res, next) {
 }
 
 module.exports = {
+  getCartItem: getCartItem,
   addCartItem: addCartItem,
 };
