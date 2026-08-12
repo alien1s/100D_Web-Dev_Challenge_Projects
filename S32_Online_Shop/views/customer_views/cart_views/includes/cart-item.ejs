@@ -2,10 +2,10 @@
   <div class="cart-item-info">
     <h2><%= item.product.title %></h2>
     <p>
-      <%= item.totalPrice.toFixed(2) %>
+      $<%= item.totalPrice.toFixed(2) %>
       <strong>
         of (
-        <span class="cart-product-price"><%= item.product.price.toFixed(2) %></span>
+        <span class="cart-product-price">$<%= item.product.price.toFixed(2) %></span>
         )
       </strong>
     </p>
