@@ -18,8 +18,8 @@
         </ul>
         <div id="cart-total">
             <h2>Total:</h2>
-            <p><span class="cart-product-price">Items:</span> <%= locals.cart.totalQuantity %></p>
-            <p><span class="cart-product-price">Price:</span> $<%= locals.cart.totalPrice.toFixed(2) %></p>
+    <p><span class="cart-product-price">Items:</span> <span id="cart-total-quantity"><%= locals.cart.totalQuantity %></span></p>
+    <p><span class="cart-product-price">Price:</span> $<span id="cart-total-price"><%= locals.cart.totalPrice.toFixed(2) %></span></p>
             <button class="btn">Buy Product</button>
         </div>
     </main>
