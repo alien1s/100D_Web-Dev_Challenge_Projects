@@ -15,6 +15,7 @@ const checkAuthStatus = require("./middlewares/check-auth.middleware");
 const routeGuard = require("./middlewares/guard-routes.middleware");
 const cartInit = require("./middlewares/init-cart.middleware");
 const updateCartPricesMiddleware = require("./middlewares/update-cart-prices");
+const notFoundMiddleware = require("./middlewares/not-found");
 
 const baseRoutes = require("./routes/base.route");
 const authRoutes = require("./routes/auth.route");
@@ -55,9 +56,10 @@ app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productsRoutes);
 app.use("/cart", cartRoutes);
-app.use(routeGuard);
-app.use("/orders", ordersRoutes);
-app.use("/admin", adminRoutes);
+app.use("/orders", routeGuard, ordersRoutes);
+app.use("/admin", routeGuard, adminRoutes);
+
+app.use(notFoundMiddleware);
 
 //..........
 
