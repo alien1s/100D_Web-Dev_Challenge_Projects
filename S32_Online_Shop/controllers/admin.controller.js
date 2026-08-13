@@ -88,7 +88,7 @@ async function updateOrder(req, res, next) {
   const newStatus = req.body.newStatus;
 
   try {
-    const order = await Order.findByOrderId(orderId);
+    const order = await Order.findOrderById(orderId);
 
     order.status = newStatus;
 

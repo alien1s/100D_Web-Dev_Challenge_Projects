@@ -24,11 +24,11 @@ class Order {
       orderDoc.userData,
       orderDoc.status,
       orderDoc.date,
-      orderDoc.id,
+      orderDoc._id,
     );
   }
 
-  static transformOrederDocs(orderDoc) {
+  static transformOrderDocs(orderDoc) {
     return orderDoc.map(this.transformOrderDoc);
   }
 
@@ -39,7 +39,7 @@ class Order {
       .find()
       .sort({ _id: -1 })
       .toArray();
-    return this.transformOrederDocs(orderDoc);
+    return this.transformOrderDocs(orderDoc);
   }
 
   static async findAllForUser(userId) {
@@ -51,16 +51,15 @@ class Order {
       .find({ "userData._id": uid })
       .sort({ _id: -1 })
       .toArray();
-    return this.transformOrederDocs(orderDoc);
+    return this.transformOrderDocs(orderDoc);
   }
 
   static async findOrderById(orderId) {
     const orderDoc = await db
       .getDb()
       .collection("orders")
-      .findOne({ _id: new mongodb.ObjectId(orderId) })
-      .toArray();
-    return this.transformOrederDocs(orderDoc);
+      .findOne({ _id: new mongodb.ObjectId(orderId) });
+    return this.transformOrderDoc(orderDoc);
   }
 
   async save() {
