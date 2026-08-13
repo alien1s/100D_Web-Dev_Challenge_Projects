@@ -38,6 +38,16 @@
   color: var(--color-primary-500);
 }
 
+#cart-total #cart-total-fallback {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+#cart-total #cart-total-fallback-btn {
+  text-decoration: underline;
+  color: var(--color-primary-700);
+}
+
 @media (min-width: 48rem) {
   .cart-item {
     flex-direction: row;

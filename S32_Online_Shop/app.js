@@ -20,6 +20,7 @@ const authRoutes = require("./routes/auth.route");
 const productsRoutes = require("./routes/products.route");
 const adminRoutes = require("./routes/admin.route");
 const cartRoutes = require("./routes/cart.route");
+const ordersRoutes = require("./routes/order.route");
 
 //-----------
 
@@ -53,6 +54,7 @@ app.use(authRoutes);
 app.use(productsRoutes);
 app.use("/cart", cartRoutes);
 app.use(routeGuard);
+app.use("/orders", ordersRoutes);
 app.use("/admin", adminRoutes);
 
 //..........
