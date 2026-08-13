@@ -14,7 +14,7 @@ const errorHandler = require("./middlewares/error-handling.middleware");
 const checkAuthStatus = require("./middlewares/check-auth.middleware");
 const routeGuard = require("./middlewares/guard-routes.middleware");
 const cartInit = require("./middlewares/init-cart.middleware");
-const updateCartPricesMiddleware = require("./middlewares/update-cart-prices");
+const updateCartPricesMiddleware = require("./middlewares/update-cart-prices.middleware");
 const notFoundMiddleware = require("./middlewares/not-found");
 
 const baseRoutes = require("./routes/base.route");

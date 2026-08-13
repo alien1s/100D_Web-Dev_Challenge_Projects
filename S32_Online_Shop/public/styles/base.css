@@ -113,3 +113,10 @@ a {
   background-color: var(--color-primary-500);
   color: var(--color-primary-500-contrast);
 }
+
+.copyright {
+  text-align: center;
+  margin: auto;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
