@@ -5,9 +5,12 @@ const csrf = require("csurf");
 const session = require("express-session");
 
 //------
+
 const createSessionConfig = require("./config/session.config");
 
 const db = require("./data/database");
+
+//------
 
 const addCsrfTokenMiddleware = require("./middlewares/csrf-tokens.middleware");
 const errorHandler = require("./middlewares/error-handling.middleware");
@@ -15,7 +18,7 @@ const checkAuthStatus = require("./middlewares/check-auth.middleware");
 const routeGuard = require("./middlewares/guard-routes.middleware");
 const cartInit = require("./middlewares/init-cart.middleware");
 const updateCartPricesMiddleware = require("./middlewares/update-cart-prices.middleware");
-const notFoundMiddleware = require("./middlewares/not-found");
+const notFoundMiddleware = require("./middlewares/not-found.middleware");
 
 const baseRoutes = require("./routes/base.route");
 const authRoutes = require("./routes/auth.route");
