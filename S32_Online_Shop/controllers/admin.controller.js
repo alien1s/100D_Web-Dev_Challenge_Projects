@@ -71,6 +71,8 @@ async function deleteProduct(req, res, next) {
   res.json({ message: "Product was deleted!" });
 }
 
+
+
 module.exports = {
   getProducts: getProducts,
   getAddingNewProduct: getAddingNewProduct,
