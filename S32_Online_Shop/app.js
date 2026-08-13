@@ -14,6 +14,7 @@ const errorHandler = require("./middlewares/error-handling.middleware");
 const checkAuthStatus = require("./middlewares/check-auth.middleware");
 const routeGuard = require("./middlewares/guard-routes.middleware");
 const cartInit = require("./middlewares/init-cart.middleware");
+const updateCartPricesMiddleware = require("./middlewares/update-cart-prices");
 
 const baseRoutes = require("./routes/base.route");
 const authRoutes = require("./routes/auth.route");
@@ -40,6 +41,7 @@ const sessionStore = createSessionConfig();
 app.use(session(sessionStore));
 
 app.use(cartInit);
+app.use(updateCartPricesMiddleware);
 
 const csrfProtection = csrf();
 app.use(csrfProtection); // parse and create csrf for request
