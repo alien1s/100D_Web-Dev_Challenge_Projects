@@ -1,4 +1,4 @@
-const mongoDb = require("mongodb");
+const mongodb = require("mongodb");
 const db = require("../data/database");
 
 class Product {
@@ -22,7 +22,7 @@ class Product {
   static async fetchById(productId) {
     let prodId;
     try {
-      prodId = new mongoDb.ObjectId(productId);
+      prodId = new mongodb.ObjectId(productId);
     } catch (error) {
       error.code = 404;
       throw error;
@@ -75,7 +75,7 @@ class Product {
     };
 
     if (this.id) {
-      const prodId = new mongoDb.ObjectId(this.id);
+      const prodId = new mongodb.ObjectId(this.id);
 
       if (!this.image) {
         delete productData.image;
@@ -99,7 +99,7 @@ class Product {
     let product;
     try {
       product = await Product.fetchById(productId);
-      const prodId = new mongoDb.ObjectId(product.id);
+      const prodId = new mongodb.ObjectId(product.id);
       await db.getDb().collection("products").deleteOne({ _id: prodId });
     } catch (error) {
       error.code = 404;
