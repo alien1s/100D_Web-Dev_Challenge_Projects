@@ -8,4 +8,7 @@ const router = express.Router();
 router.get("/", orderController.getOrders);
 router.post("/", orderController.addOrder);
 
+router.get("/success", orderController.getSuccess);
+router.get("/failure", orderController.getFailure);
+
 module.exports = router;
