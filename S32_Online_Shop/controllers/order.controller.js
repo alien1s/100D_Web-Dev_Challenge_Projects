@@ -1,6 +1,5 @@
-const stripe = require("stripe")(
-  "sk_test_51U3z54D8IH2MqRMptJt2xwdRgoohG0BHlRl1I7gNhxqy5XgY3oU3o9IzZrldBvEWRbHasQlOnUZukq4eNdFPqdRc00nZuXwox4",
-);
+require("dotenv").config();
+const stripe = require("stripe")(process.env.SECRET_STRIPE_TOKEN);
 
 const User = require("../models/user.model");
 const Order = require("../models/order.model");
@@ -45,7 +44,7 @@ async function addOrder(req, res, next) {
           product_data: {
             name: item.product.title,
           },
-          unit_amount: +item.product.price.toFixed(2)*100,
+          unit_amount: +item.product.price.toFixed(2) * 100,
         },
         quantity: +item.quantity,
       };
