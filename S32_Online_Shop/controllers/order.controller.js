@@ -53,8 +53,6 @@ async function addOrder(req, res, next) {
     mode: "payment",
     success_url: "http://localhost:3000/orders/success",
     cancel_url: "http://localhost:3000/orders/failure",
-    // Provide a name (for example, hosted_web_0001) to label this Checkout integration and measure its conversion independently
-    integration_identifier: "{{INTEGRATION_ID}}",
   });
 
   res.redirect(303, session.url);

@@ -20,12 +20,14 @@
             <h2>Total:</h2>
                 <p><span class="cart-product-price">Items:</span> <span id="cart-total-quantity"><%= locals.cart.totalQuantity %></span></p>
                 <p><span class="cart-product-price">Price:</span> $<span id="cart-total-price"><%= locals.cart.totalPrice.toFixed(2) %></span></p>
-            <% if (isAuth) {%>
+            <% if (isAuth && locals.cart.totalQuantity>0) {%>
                 <form action="/orders" method="POST">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <button class="btn">Buy Product</button>
                 </form>
-            <%} else  {%> 
+            <%} else if(isAuth) {%> 
+                <p id="cart-total-fallback"><a id="cart-total-fallback-btn" href="/products">Add Products</a> to proceed and purchase .</p>
+            <% } else { %>
                 <p id="cart-total-fallback"><a id="cart-total-fallback-btn" href="/login">LogIn</a> to proceed and purchase the items.</p>
             <% } %>    
         </div>
