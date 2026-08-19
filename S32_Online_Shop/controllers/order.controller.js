@@ -1,5 +1,5 @@
 require("dotenv").config();
-const stripe = require("stripe")(process.env.SECRET_STRIPE_TOKEN);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const User = require("../models/user.model");
 const Order = require("../models/order.model");
