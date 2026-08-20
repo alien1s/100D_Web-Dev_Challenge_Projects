@@ -29,6 +29,14 @@ const ordersRoutes = require("./routes/order.route");
 
 //-----------
 
+let port = 3000;
+
+if (process.env.PORT) {
+  port = process.env.PORT;
+}
+
+//-----------
+
 const app = express();
 
 app.set("view engine", "ejs");
@@ -70,7 +78,7 @@ app.use(errorHandler);
 
 db.connectToDatabase()
   .then(function () {
-    app.listen(3000);
+    app.listen(port);
   })
   .catch(function (error) {
     console.log("Faild to connect to the database!");
