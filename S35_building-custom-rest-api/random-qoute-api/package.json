@@ -1,0 +1,19 @@
+{
+  "name": "random-qoute-api",
+  "version": "1.0.0",
+  "description": "random qoute api",
+  "license": "ISC",
+  "author": "Saif-Eldin A Abdelrahman",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongodb": "^7.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
