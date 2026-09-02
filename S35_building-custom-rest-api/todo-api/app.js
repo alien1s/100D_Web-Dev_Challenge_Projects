@@ -2,12 +2,19 @@ const express = require("express");
 
 const db = require("./data/database");
 
+const todosRouter = require("./routes/todo.route");
+
 const app = express();
+
+app.use(express.json());
+
+app.use("/todos", todosRouter);
 
 app.use(function (error, req, res, next) {
   res.status(500).json({
     message: "Someting went wrong!",
   });
+  console.log(error);
 });
 
 db.initDb()
