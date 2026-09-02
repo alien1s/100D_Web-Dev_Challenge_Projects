@@ -13,6 +13,21 @@ async function fetchTodos(req, res, next) {
   });
 }
 
+async function fetchTodo(req, res, next) {
+  const todoId = req.params.id;
+
+  let todo;
+  try {
+    todo = await Todo.fetchTodoById(todoId);
+  } catch (error) {
+    next(error);
+    return;
+  }
+  res.json({
+    todo: todo,
+  });
+}
+
 async function addTodo(req, res, next) {
   const todoData = {
     text: req.body.text,
@@ -74,6 +89,7 @@ async function deleteTodo(req, res, next) {
 
 module.exports = {
   fetchTodos: fetchTodos,
+  fetchTodo: fetchTodo,
   addTodo: addTodo,
   updateTodo: updateTodo,
   deleteTodo: deleteTodo,

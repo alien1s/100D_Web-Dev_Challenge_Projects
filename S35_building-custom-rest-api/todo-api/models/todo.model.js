@@ -4,7 +4,7 @@ const db = require("../data/database");
 class Todo {
   constructor(todoData) {
     this.text = todoData.text;
-    if (!todoData._id) {
+    if (todoData._id) {
       this.id = todoData._id.toString();
     }
   }
@@ -20,11 +20,15 @@ class Todo {
     const singleTodo = await db
       .getDb()
       .collection("todos")
-      .findOne({ _id: id })
-      .toArray();
-    return singleTodo.map(function (singleTodoDoc) {
-      return new Todo(singleTodoDoc);
-    });
+      .findOne({ _id: id });
+
+    if (!singleTodo) {
+      const error = new Error("Could not find todo for id " + todoId);
+      error.code = 404;
+      throw error;
+    }
+
+    return new Todo(singleTodo);
   }
 
   static async fetchAllTodos() {

@@ -1,10 +1,13 @@
 const express = require("express");
+const cors = require("cors");
 
 const db = require("./data/database");
 
 const todosRouter = require("./routes/todo.route");
 
 const app = express();
+
+app.use(cors())
 
 app.use(express.json());
 

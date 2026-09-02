@@ -12,8 +12,8 @@ async function initDb() {
 function getDb() {
   if (!database) {
     throw new Error("Couldn't Connect to database");
-    return database;
   }
+  return database;
 }
 
 module.exports = {
