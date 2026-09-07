@@ -98,7 +98,6 @@ class Product {
   static async delete(productId) {
     let product;
     try {
-      product = await Product.fetchById(productId);
       const prodId = new mongodb.ObjectId(product.id);
       await db.getDb().collection("products").deleteOne({ _id: prodId });
     } catch (error) {
