@@ -21,7 +21,7 @@ async function loadTodos() {
   const todos = responseData.todos;
 
   for (const todo of todos) {
-    createTodoListItem(todo.text, todo.id);
+    createTodoListItem(todo.text, todo._id);
   }
 }
 
