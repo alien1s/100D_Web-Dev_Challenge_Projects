@@ -1,13 +1,16 @@
 const express = require("express");
-const cors = require("cors");
+// const cors = require("cors");
 
 const db = require("./data/database");
 
 const todosRouter = require("./routes/todo.route");
+const enableCors = require("./middlewares/cors");
 
 const app = express();
 
-app.use(cors())
+// app.use(cors());
+
+app.use(enableCors);
 
 app.use(express.json());
 

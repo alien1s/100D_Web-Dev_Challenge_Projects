@@ -52,7 +52,7 @@ async function addTodo(req, res, next) {
 async function updateTodo(req, res, next) {
   const todoId = req.params.id;
   const todoData = {
-    text: req.body.text,
+    text: req.body.newText,
     _id: todoId,
   };
   const todo = new Todo(todoData);
