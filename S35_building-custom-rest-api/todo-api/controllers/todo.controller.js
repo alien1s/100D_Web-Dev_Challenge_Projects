@@ -45,7 +45,10 @@ async function addTodo(req, res, next) {
   todoData._id = resulte.id;
   res.json({
     message: resulte.message,
-    savedTodo: todoData,
+    savedTodo: {
+      id: resulte.id,
+      text: todoData.text,
+    },
   });
 }
 
@@ -67,11 +70,10 @@ async function updateTodo(req, res, next) {
 
   res.json({
     message: resulte.message,
-    createdTodo: {
-      id: resulte._id,
+    updatedTodo: {
+      id: todoId,
       text: todoData.text,
     },
-    updatedTodo: todoData,
   });
 }
 

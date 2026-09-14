@@ -21,7 +21,7 @@ async function loadTodos() {
   const todos = responseData.todos;
 
   for (const todo of todos) {
-    createTodoListItem(todo.text, todo._id);
+    createTodoListItem(todo.text, todo.id);
   }
 }
 
@@ -74,7 +74,7 @@ async function createTodo(todoText) {
   }
 
   const responseData = await response.json();
-  const todoId = responseData.savedTodo._id;
+  const todoId = responseData.savedTodo.id;
 
   createTodoListItem(todoText, todoId);
 }

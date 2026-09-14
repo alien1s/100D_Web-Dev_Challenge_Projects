@@ -53,10 +53,16 @@ class Todo {
         error.code = 404;
         throw error;
       }
-      await db
+      const result = await db
         .getDb()
         .collection("todos")
         .updateOne({ _id: id }, { $set: { text: this.text } });
+      if (result.matchedCount === 0) {
+        const error = new Error("Could not find todo for id " + this.id);
+        error.code = 404;
+        throw error;
+      }
+
       return { message: "Todo updated successfully" };
     } else {
       const todoMeta = await db
@@ -79,7 +85,12 @@ class Todo {
       error.code = 404;
       throw error;
     }
-    await db.getDb().collection("todos").deleteOne({ _id: id });
+    const result = await db.getDb().collection("todos").deleteOne({ _id: id });
+    if (result.deletedCount === 0) {
+      const error = new Error("Could not find todo for id " + todoId);
+      error.code = 404;
+      throw error;
+    }
     return { message: "Todo deleted successfully" };
   }
 }
