@@ -74,7 +74,7 @@ async function createTodo(todoText) {
   }
 
   const responseData = await response.json();
-  const todoId = responseData.createdTodo.id;
+  const todoId = responseData.savedTodo.id;
 
   createTodoListItem(todoText, todoId);
 }
