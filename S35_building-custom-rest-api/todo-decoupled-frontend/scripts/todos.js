@@ -1,19 +1,19 @@
-const todoFormElement = document.querySelector('#todo-management form');
-const todosListElement = document.getElementById('todos-list');
+const todoFormElement = document.querySelector("#todo-management form");
+const todosListElement = document.getElementById("todos-list");
 
 let editedTodoElement;
 
 async function loadTodos() {
   let response;
   try {
-    response = await fetch('http://localhost:3000/todos');
+    response = await fetch("http://localhost:3000/todos");
   } catch (error) {
-    alert('Something went wrong!');
+    alert("Something went wrong!");
     return;
   }
 
   if (!response.ok) {
-    alert('Something went wrong!');
+    alert("Something went wrong!");
     return;
   }
 
@@ -26,21 +26,21 @@ async function loadTodos() {
 }
 
 function createTodoListItem(todoText, todoId) {
-  const newTodoItemElement = document.createElement('li');
+  const newTodoItemElement = document.createElement("li");
   newTodoItemElement.dataset.todoid = todoId; // data-todoid
 
-  const todoTextElement = document.createElement('p');
+  const todoTextElement = document.createElement("p");
   todoTextElement.textContent = todoText;
 
-  const editTodoButtonElement = document.createElement('button');
-  editTodoButtonElement.textContent = 'Edit';
-  editTodoButtonElement.addEventListener('click', startTodoEditing);
+  const editTodoButtonElement = document.createElement("button");
+  editTodoButtonElement.textContent = "Edit";
+  editTodoButtonElement.addEventListener("click", startTodoEditing);
 
-  const deleteTodoButtonElement = document.createElement('button');
-  deleteTodoButtonElement.textContent = 'Delete';
-  deleteTodoButtonElement.addEventListener('click', deleteTodo);
+  const deleteTodoButtonElement = document.createElement("button");
+  deleteTodoButtonElement.textContent = "Delete";
+  deleteTodoButtonElement.addEventListener("click", deleteTodo);
 
-  const todoActionsWrapperElement = document.createElement('div');
+  const todoActionsWrapperElement = document.createElement("div");
   todoActionsWrapperElement.appendChild(editTodoButtonElement);
   todoActionsWrapperElement.appendChild(deleteTodoButtonElement);
 
@@ -54,27 +54,27 @@ async function createTodo(todoText) {
   let response;
 
   try {
-    response = await fetch('http://localhost:3000/todos', {
-      method: 'POST',
+    response = await fetch("http://localhost:3000/todos", {
+      method: "POST",
       body: JSON.stringify({
         text: todoText,
       }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
   } catch (error) {
-    alert('Something went wrong!');
+    alert("Something went wrong!");
     return;
   }
 
   if (!response.ok) {
-    alert('Something went wrong!');
+    alert("Something went wrong!");
     return;
   }
 
   const responseData = await response.json();
-  const todoId = responseData.savedTodo.id;
+  const todoId = responseData.savedTodo._id;
 
   createTodoListItem(todoText, todoId);
 }
@@ -84,28 +84,28 @@ async function updateTodo(newTodoText) {
   let response;
 
   try {
-    response = await fetch('http://localhost:3000/todos/' + todoId, {
-      method: 'PATCH',
+    response = await fetch("http://localhost:3000/todos/" + todoId, {
+      method: "PATCH",
       body: JSON.stringify({
         newText: newTodoText,
       }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
   } catch (error) {
-    alert('Something went wrong!');
+    alert("Something went wrong!");
     return;
   }
 
   if (!response.ok) {
-    alert('Something went wrong!');
+    alert("Something went wrong!");
     return;
   }
 
   editedTodoElement.firstElementChild.textContent = newTodoText;
 
-  todoFormElement.querySelector('input').value = '';
+  todoFormElement.querySelector("input").value = "";
   editedTodoElement = null;
 }
 
@@ -117,16 +117,16 @@ async function deleteTodo(event) {
   let response;
 
   try {
-    response = await fetch('http://localhost:3000/todos/' + todoId, {
-      method: 'DELETE',
+    response = await fetch("http://localhost:3000/todos/" + todoId, {
+      method: "DELETE",
     });
   } catch (error) {
-    alert('Something went wrong!');
+    alert("Something went wrong!");
     return;
   }
 
   if (!response.ok) {
-    alert('Something went wrong!');
+    alert("Something went wrong!");
     return;
   }
 
@@ -137,7 +137,7 @@ function saveTodo(event) {
   event.preventDefault();
 
   const formInput = new FormData(event.target);
-  const enteredTodoText = formInput.get('text');
+  const enteredTodoText = formInput.get("text");
 
   if (!editedTodoElement) {
     // We're adding a new todo
@@ -153,9 +153,9 @@ function startTodoEditing(event) {
   editedTodoElement = clickedButtonElement.parentElement.parentElement; // the <li>
   const currentText = editedTodoElement.firstElementChild.textContent;
 
-  todoFormElement.querySelector('input').value = currentText;
+  todoFormElement.querySelector("input").value = currentText;
 }
 
-todoFormElement.addEventListener('submit', saveTodo);
+todoFormElement.addEventListener("submit", saveTodo);
 
 loadTodos();

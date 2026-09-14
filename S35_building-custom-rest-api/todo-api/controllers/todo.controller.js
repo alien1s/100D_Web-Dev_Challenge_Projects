@@ -67,6 +67,10 @@ async function updateTodo(req, res, next) {
 
   res.json({
     message: resulte.message,
+    createdTodo: {
+      id: resulte.id,
+      text: todoData.text,
+    },
     updatedTodo: todoData,
   });
 }
