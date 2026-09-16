@@ -4,11 +4,12 @@ const TodoApp = {
       todos: [],
       enteredTodoText: "",
       editedTodoId: null,
+      isLoading: false,
     };
   },
 
   methods: {
-    saveTodo(event) {
+    async saveTodo(event) {
       event.preventDefault();
 
       if (this.editedTodoId) {
@@ -26,10 +27,35 @@ const TodoApp = {
 
         this.editedTodoId = null;
       } else {
+        let response;
+
+        try {
+          response = await fetch("http://localhost:3000/todos", {
+            method: "POST",
+            body: JSON.stringify({
+              text: this.enteredTodoText,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+        } catch (error) {
+          alert("Something went wrong!");
+          return;
+        }
+
+        if (!response.ok) {
+          alert("Something went wrong!");
+          return;
+        }
+
+        const responseData = await response.json();
+
         const newTodo = {
           text: this.enteredTodoText,
-          id: new Date().toISOString(),
+          id: responseData.savedTodo.id,
         };
+
         this.todos.push(newTodo);
       }
       this.enteredTodoText = "";
@@ -45,10 +71,32 @@ const TodoApp = {
     },
 
     deleteTodo(todoId) {
-      this.todos = this.todos.filter(function(todoItem){
+      this.todos = this.todos.filter(function (todoItem) {
         return todoItem.id !== todoId;
       });
     },
+  },
+
+  async created() {
+    let response;
+    this.isLoading = true;
+    try {
+      response = await fetch("http://localhost:3000/todos");
+    } catch (error) {
+      alert("Something went wrong!");
+      this.isLoading = false;
+      return;
+    }
+
+    this.isLoading = false;
+
+    if (!response.ok) {
+      alert("Something went wrong!");
+      return;
+    }
+
+    const responseData = await response.json();
+    this.todos = responseData.todos;
   },
 };
 
